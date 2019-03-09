@@ -1,13 +1,15 @@
-import React, {Component} from 'react'
-import Login from './authentication/Login'
-class App extends Component{
-render(){
+import React, { Component } from "react";
+import Login from "./authentication/Login";
+import Register from "./authentication/Register";
+class App extends Component {
+  render() {
     return (
-        <div>
+      <div>
         <h3>Hello from app Component</h3>
         <Login />
-        </div>
+        <Register />
+      </div>
     );
-}
+  }
 }
 export default App;

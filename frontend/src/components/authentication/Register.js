@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
-class Login extends Component {
+class Register extends Component {
   state = {
     username: "",
     email: "",
-    password: ""
+    password1: "",
+    password2: ""
   };
   handleOnchange = () => {
     this.setState({ [event.target.id]: event.target.value });
@@ -12,16 +13,17 @@ class Login extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const logindetails = {
+    const registrationdetails = {
       username: this.state.username,
       email: this.state.email,
-      password: this.state.password
+      password1: this.state.password1,
+      password2: this.state.password2
     };
 
     axios
-      .post("/rest-auth/login/", logindetails)
+      .post("/rest-auth/registration/", registrationdetails)
       .then(response => {
-        console.log("login sucessful");
+        console.log(response);
       })
       .catch(error => {
         if (error.response) {
@@ -45,7 +47,7 @@ class Login extends Component {
   render() {
     return (
       <React.Fragment>
-        <h3>Login</h3>
+        <h3>Registration</h3>
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="username">Username</label>
@@ -76,18 +78,29 @@ class Login extends Component {
             <input
               type="password"
               className="form-control"
-              id="password"
+              id="password1"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this.handleOnchange}
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Confirm Password</label>
+            <input
+              type="password"
+              className="form-control"
+              id="password2"
               placeholder="Password"
               value={this.state.password}
               onChange={this.handleOnchange}
             />
           </div>
           <button type="submit" className="btn btn-primary">
-            Login
+            Register
           </button>
         </form>
       </React.Fragment>
     );
   }
 }
-export default Login;
+export default Register;
